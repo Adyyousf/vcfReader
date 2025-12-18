@@ -2,11 +2,13 @@ annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.12.0
 certifi==2025.11.12
+charset-normalizer==3.4.4
 click==8.3.1
 colorama==0.4.6
 dnspython==2.8.0
 email-validator==2.3.0
 fastapi==0.125.0
+fastapi-analytics==1.2.5
 fastapi-cli==0.0.16
 fastapi-cloud-cli==0.7.0
 fastar==0.8.0
@@ -29,6 +31,7 @@ python-dotenv==1.2.1
 python-multipart==0.0.21
 pytz==2025.2
 PyYAML==6.0.3
+requests==2.32.5
 rich==14.2.0
 rich-toolkit==0.17.1
 rignore==0.7.6

@@ -1,13 +1,13 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import StreamingResponse, FileResponse
 from vcfReader import get_cleaned_contacts
-from api_analytics.fastapi import Analytics
+# from api_analytics.fastapi import Analytics
 import io
 
 
 # Create FastAPI instance
 app = FastAPI()
-app.add_middleware(Analytics, api_key = "bad085ee-96d0-4451-bf65-ee1055806930")
+# app.add_middleware(Analytics, api_key = "")
 
 @app.get("/")
 async def serve_ui():
@@ -21,7 +21,7 @@ async def upload_file(file: UploadFile = File(...)):
     # read the uploaded file
     contents = await file.read()
     vcf_data = contents.decode('utf-8')
-
+    print(f"Received file: {file.filename}, size: {len(contents)} bytes")
     cleaned_df = get_cleaned_contacts(vcf_data)
 
     stream = io.StringIO()

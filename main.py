@@ -2,13 +2,17 @@ from fastapi import FastAPI, File, UploadFile
 import io
 
 
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 
 from vcfReader import get_cleaned_contacts
 
 
 # Create FastAPI instance
 app = FastAPI()
+
+@app.get("/")
+async def serve_ui():
+    return FileResponse('index.html')
 
 # create an endpoint to upload VCF files
 
@@ -31,7 +35,7 @@ async def upload_file(file: UploadFile = File(...)):
     )
     return response
 
-# server check
-@app.get("/")
-def home():
-    return {"message": "VCF Reader API is running. Go to /docs to upload."}
+# # server check
+# @app.get("/")
+# def home():
+#     return {"message": "VCF Reader API is running. Go to /docs to upload."}

@@ -31,6 +31,8 @@ def vcf_to_df(vcf_file):
         
         if hasattr(vCard, 'org'):
             contact_dict['Organization'] = vCard.org.value
+        else:
+            contact_dict['Organization'] = None
         contact_list.append(contact_dict)
     return pd.DataFrame(contact_list).fillna('')
         # print(contact_dict)
@@ -64,6 +66,8 @@ def get_cleaned_contacts(vcf_file):
 
     df = vcf_to_df(vcf_file)
 
+    length = len(df)
+
     merged_df = df.groupby('Full Name').agg({
         'Phone': list,
         'Email': list,
@@ -74,7 +78,7 @@ def get_cleaned_contacts(vcf_file):
     merged_df['Organization'] = merged_df['Organization'].apply(clean_contacts_df)
     merged_df['Email'] = merged_df['Email'].apply(clean_contacts_df)
 
-    return merged_df
+    return merged_df, length
 
 # # print(contact_list)
 # df = vcf_to_df('contacts.vcf')
